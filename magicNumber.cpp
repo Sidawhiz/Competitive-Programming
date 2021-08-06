@@ -5,8 +5,6 @@ using namespace std;
 
 //https://codeforces.com/problemset/problem/628/D
 
-// Code needs to be refined more although it works for 10-99,100-999 or limits of same digits
-// It doesn't work more 10-999 correctly- needs to break according to digit
 
 /* 
 Consider the decimal presentation of an integer. 
@@ -23,7 +21,7 @@ int d;
 int m;
 int dp[12][90][2]; // handles only upto 10 digit numbers, number of times d placed at even place , 
 // check for sum divisible by m , last is for tightness check
-int solve(int pos ,int sum, int t,int c){
+int solve(int pos ,int sum, int t,int c,int cnt){
     //Base case
     if(pos==s.size()){
         if(sum==0){
@@ -45,21 +43,25 @@ int solve(int pos ,int sum, int t,int c){
         lim = s[pos] - '0';
     }
     for(int i = 0; i<=lim ; i++){
+        int ncnt = cnt;
         int r3 = c;
         if(r3==-1 && i!=0){
             r3 = pos;
+        }
+        else if(r3==-1 && i==0){
+            ncnt++;
         }
         int f = t;
         if(f==0 && i<lim){
             f = 1;
         }
-        if((pos-r3)%2==0 && i==d){
+        if((pos+ncnt)%2==0 && i==d){
             continue;
         }
-        if((pos-r3)%2!=0 && i!=d){
+        if((pos+ncnt)%2!=0 && i!=d){
             continue;
         }
-        ans += solve(pos + 1, (sum * 10 + i) % m, f,r3);
+        ans += solve(pos + 1, (sum * 10 + i) % m, f,r3,ncnt);
     }
     // If not evaluate and store
     dp[pos][sum][t] = ans;
@@ -81,10 +83,10 @@ int main(){
     a[t]--;
     s = a;
     memset(dp, -1 , sizeof(dp));
-    int l = solve(0,0,0,-1);
+    int l = solve(0,0,0,-1,0);
     s = b;
     memset(dp, -1,sizeof(dp));
-    int r = solve(0,0,0,-1);
+    int r = solve(0,0,0,-1,0);
     cout << "Number of such numbers are : " << r - l<<endl;
     return 0;
 }
