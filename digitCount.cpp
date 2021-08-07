@@ -70,7 +70,7 @@ int main(){
     s = b;
     cout << b << endl;
     memset(dp,-1,sizeof(dp));
-    int r = solve(0,0,9);
+    int r = solve(0,1,9);
 
     cout << "Number of such numbers are : " << r;
 }
