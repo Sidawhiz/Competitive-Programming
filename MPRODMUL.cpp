@@ -33,15 +33,21 @@ Constraints
 1≤T≤100     1≤A≤B≤10^18      1≤K≤100
 */
 
-int K;
+int KK;
 string t,s;
 pair<ll,string> dp[20][2][2][2][180][10];
 pair<ll,string> solve(int pos, int t1, int t2, int str , int sum,int prev){
     //Base case
-    if(pos == t.size() && sum==0){
-        pair<ll,string> tmp;
-        tmp = make_pair(1,"");
-        return tmp;
+    if(pos == t.size()){
+        if(sum==0){
+            pair<ll,string> tmp;
+            tmp = make_pair(1,"");
+            return tmp;}
+        else{
+            pair<ll,string> tmp;
+            tmp = make_pair(0,"");
+            return tmp;
+        }
     }
 
     // already evaluated
@@ -83,7 +89,7 @@ pair<ll,string> solve(int pos, int t1, int t2, int str , int sum,int prev){
         else{
             srt2 = str;
         }
-        sum2 = (10*sum + i)%K;
+        sum2 = (10*sum + i)%KK;
         pair<ll,string> k = solve(pos+1,f1,f2,srt2,sum2,i);
         if((val * k.first) > rest){
             rest = val * k.first;
@@ -101,44 +107,53 @@ pair<ll,string> solve(int pos, int t1, int t2, int str , int sum,int prev){
 }
 
 int main(){
-    int tt,k;
+    int tt,kv;
     cin >>tt;
     string left, right ;
-    while(tt--){
-    cin >> left >> right >> k;
-    K = k;
-    for(int i = 0; i<20 ; i++){
-        for(int j = 0; j<2;j++){
-            for(int k = 0; k<2;k++){
-                for(int l = 0 ; l<2;l++){
-                    for(int m = 0 ; m < 180; m++){
-                        for(int n = 0; n<10 ; n++){
-                            pair<ll,string> tm;
-                            tm = make_pair(-1,"");
-                            dp[i][j][k][l][m][n] = tm;
+    while(tt--)
+    {
+        cin >> left >> right >> kv;
+        KK = kv;
+        for(int i = 0; i<20 ; i++)
+        {
+            for(int j = 0; j<2;j++)
+            {
+                for(int k = 0; k<2;k++)
+                {
+                    for(int l = 0 ; l<2;l++)
+                    {
+                        for(int m = 0 ; m < 180; m++)
+                        {
+                            for(int n = 0; n<10 ; n++)
+                            {
+                                pair<ll,string> tm;
+                                tm = make_pair(-1,"");
+                                dp[i][j][k][l][m][n] = tm;
+                            }
                         }
                     }
                 }
             }
         }
-    }
 
-    reverse(left.begin(),left.end()); // If a = 12 b = 4000
-    while(left.size()<right.size()){
-        left.push_back('0');
-    }
-    reverse(left.begin(),left.end()); // a becomes 0012
+        reverse(left.begin(),left.end()); // If a = 12 b = 4000
+        while(left.size()<right.size()){
+            left.push_back('0');
+        }
+        reverse(left.begin(),left.end()); // a becomes 0012
 
-    t = left;
-    s = right;
-    pair<ll,string> ans = solve(0,0,0,0,0,0);
-    if(ans.second == ""){
-        cout << "Answer is : " << ans.first << endl;
-    }
-    else{
-        cout << "Answer is : " << ans.first << " " << ans.second << endl;
-    }    
+        t = left;
+        s = right;
+        pair<ll,string> ans = solve(0,0,0,0,0,0);
+        if(ans.second == ""){
+            cout << "Answer is : " << ans.first << endl;
+        }
+        else{
+            cout << "Answer is : " << ans.first << " " << ans.second << endl;
+        }    
     }
     return 0;
 }
+
+
 
