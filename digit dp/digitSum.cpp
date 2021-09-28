@@ -34,7 +34,7 @@ ll call(int pos,int f1,int sum){
     for(int i=0;i<=LIM;i++){
         ans += call(pos+1,i<num[pos] ? 1 : f1 ,sum+i );
     }
- 
+    dp[pos][f1][sum] = ans;
     return ret = ans;
 }
  
