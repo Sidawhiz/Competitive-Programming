@@ -1,1 +1,9 @@
-Topological Sort - https://cp-algorithms.com/graph/topological-sort.html
+1) Topological Sort - https://cp-algorithms.com/graph/topological-sort.html
+
+    You are given a directed graph with n vertices and m edges. You have to number the vertices so that every edge leads from the vertex with a smaller number assigned to the vertex with a larger one.
+
+    In other words, you want to find a permutation of the vertices (topological order) which corresponds to the order defined by all edges of the graph.
+
+    Topological order can be non-unique (for example, if the graph is empty; or if there exist three vertices a, b, c for which there exist paths from a to b and from a to c but not paths from b to c or from c to b).
+
+    Topological order may not exist at all if the graph contains cycles (because there is a contradiction: there is a path from a to b and vice versa).
