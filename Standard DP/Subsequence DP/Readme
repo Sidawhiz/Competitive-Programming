@@ -1,1 +1,10 @@
 Subsequence , Substring standard DP problems and there variations
+
+Problems here generally can be solved by these techniques :
+a) Prefix based subproblems : X[:i]
+b) Suffix based subproblems : X[i:]
+   Both of these techniques take O(n)*O(#subproblems)
+   
+c) Substring based subproblems : X[i:j]
+   This technique takes O(n^2)*O(#subproblems)
+   Mainly used in MATRIX based questions
