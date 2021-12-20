@@ -101,7 +101,9 @@ int main(){
     #endif
 
     //Minimum cost to reach last cell from first cell
-    //Easy straight forward dp : moves allowed right, bottom (variation can be done in moves allowed)
+    //Easy straight forward dp : moves allowed right, bottom (variation can be done in moves allowed by including diagonal move)
+    //If reverse moves are allowed , we need to use dijkstra or bellman-ford accordingly complexity increases
+    //DP can't solve if reverse moves are allowed
     int t;
     cin >> t;
     while(t--){
