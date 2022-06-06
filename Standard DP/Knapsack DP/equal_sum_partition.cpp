@@ -27,7 +27,7 @@ int solve2(int n , int sum){
     if(n==0){
         return 0;
     }
-
+ 
     if(dp2[n][sum] != -1){
         return dp2[n][sum];
     }
