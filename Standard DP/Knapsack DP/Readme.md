@@ -2,3 +2,5 @@ Minimum subset sum difference - Best problem in above set (Solve by memoisation)
 Can be done by recursion as well
 
 Idea - Last row of memoised table of subset sum problem is our way of answering
+
+Subset sum problem - with target sum = sum of array
