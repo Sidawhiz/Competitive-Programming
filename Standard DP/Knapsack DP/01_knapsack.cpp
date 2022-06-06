@@ -28,7 +28,7 @@ int solve(int n, int w){
 
     // Else calculate further
 
-    if(wt[n-1]<=W){
+    if(wt[n-1]<=w){
         return max( val[n-1] + solve(n-1,w-wt[n-1]), solve(n-1,w) );
     }
 
