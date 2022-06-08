@@ -1,6 +1,8 @@
-Matrix based DP standard questions
+#Matrix Chain Multiplication - standard code
 
-'''
+1. Mind minimum cost to multiply chain of matrices : input array {40, 20, 30, 10, 30} : answer = 26000
+
+```C++
 int a[N];
 int dp[N][N];
 
@@ -36,4 +38,4 @@ int main(){
 
     cout << solve(0,n-1) << endl;
 
-}'''
+}```
