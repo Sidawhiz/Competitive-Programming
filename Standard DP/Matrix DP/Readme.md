@@ -1,4 +1,4 @@
-#Matrix Chain Multiplication - standard code
+#Matrix Chain Multiplication - standard code - Same as digit dp code - O(n^3) complexity
 
 1. Mind minimum cost to multiply chain of matrices : input array {40, 20, 30, 10, 30} : answer = 26000
 
