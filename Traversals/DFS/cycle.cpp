@@ -17,7 +17,7 @@ int cnt;
 int ans = 0;
 
 // cycle exists iff backedge exists
-
+// worst case is to run dfs from every node - O[V*(V+E)]
 void dfs(int s){
     //Base case
     if(vis[s]==1){
