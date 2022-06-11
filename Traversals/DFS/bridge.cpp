@@ -7,7 +7,7 @@ typedef long long ll;
 typedef vector<int> vi;
 
 const int N = 1000;
-// const int mod = 1e9+7;
+const int mod = 1e9+7;
 
 vector<int> adj[N];
 int dp[N];
@@ -18,25 +18,24 @@ vector<pair<int,int>> bridge;
 
 // cycle exists iff backedge exists
 
-void dfs(int s, int lvl, int par){
-    if(vis[s]){
+void dfs(int s, int par){
+    // Base case
+    if(vis[s]==1){
         return;
     }
 
-    vis[s] =1;
-    level[s] = lvl;
-    for(int i : adj[s]){
-        if(!vis[i]){ // Tree edge
-            dfs(i,lvl+1,s);
+    // else evaluate
+    vis[s] = 1;
+    level[s] =  (par==-1) ? 0 : 1 + level[par];
+    for(auto i : adj[s]){
+        if(!vis[i]){
+            dfs(i,s);
             dp[s] = min(dp[s],dp[i]);
-            if(dp[i]<level[s]){
-                bridge.push_back(make_pair(i,s));
-            }
         }
-        else if(vis[i]){ // Back edge - undirected doesn't have cross edge
-            if(i!=par){
+        else{
+            if(i != par && level[i] < level[s]){
                 dp[s] = min(level[i],dp[s]);
-            }    
+            }
         }
     }
 }
@@ -51,18 +50,39 @@ int main(){
     int v,e,a,b;
     cin >> v >> e;
 
-    for(int i = 0 ; i<e ; i++){
+    // undirected graph
+    for(int i = 0; i<e ; i++){
         cin >> a >> b;
         adj[a].push_back(b);
         adj[b].push_back(a);
     }
-    memset(dp,INT_MAX-1,sizeof(dp));
-    memset(level,-1,sizeof(level));
+    memset(level,0,sizeof(level));
+    for(int i = 0; i<N; i++){
+        dp[i] = mod;
+    }
 
-    dfs(0,0,-1);
+    for(int i = 0; i<v; i++){
+        if(!vis[i]){
+            dfs(i,-1);
+        }
+    }
 
-    for(auto f : bridge){
-        cout << f.first << " " << f.second << endl;
+    for(int i = 0; i<v ; i++){
+        for(auto j: adj[i]){
+            // cout << dp[j] << " " << level
+            if(dp[j] > level[i]){
+                if(i>j){
+                    bridge.push_back({j,i});
+                }
+                else{
+                    bridge.push_back({i,j});
+                }
+            }
+        }
+    }
+    
+    for(int i= 0; i<bridge.size(); i++){
+        cout << bridge[i].first << " " << bridge[i].second << endl;
     }
 
 }
